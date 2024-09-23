@@ -56,6 +56,17 @@
       text-align: center;
     }
 
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .card {
       background-color: var(--card-bg-color);
       border-radius: 10px;
@@ -121,17 +132,19 @@
 
   <div class="container">
     <h1>Welcome to eqwzzx's Portfolio</h1>
-    <div class="card visible">
-      <h2>Обо мне</h2>
-      <p>Я - eqwzzx, веб-разработчик с большим опытом создания современных сайтов и приложений.</p>
-    </div>
-    <div class="card">
-      <h2>Умения</h2>
-      <p>JavaScript, HTML, CSS, React, Node.js, а также опыт работы с базами данных и оптимизацией производительности.</p>
-    </div>
-    <div class="card">
-      <h2>Контакты</h2>
-      <p>Email: eqwzzx@example.com<br>Телефон: +123456789</p>
+    <div class="cards-container">
+      <div class="card visible">
+        <h2>Обо мне</h2>
+        <p>Я - eqwzzx, веб-разработчик с большим опытом создания современных сайтов и приложений.</p>
+      </div>
+      <div class="card">
+        <h2>Умения</h2>
+        <p>JavaScript, HTML, CSS, React, Node.js, а также опыт работы с базами данных и оптимизацией производительности.</p>
+      </div>
+      <div class="card">
+        <h2>Контакты</h2>
+        <p>Email: root@eqwzzx.fun<br>Discord: eqwzzx</p>
+      </div>
     </div>
   </div>
 
