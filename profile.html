@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="278-waiting.png" type="image/ico">
   <title>eqwzzx Portfolio</title>
   <style>
     /* Определение цветовых схем для светлого и тёмного режима */
@@ -14,6 +13,7 @@
       --card-hover-color: #e0e0e0;
       --card-glow-color: rgba(0, 0, 0, 0.1);
       --card-glow-hover-color: rgba(0, 123, 255, 0.7); /* Подсвечивание при наведении */
+      --footer-bg-color: #e0e0e0;
     }
 
     [data-theme="dark"] {
@@ -23,6 +23,7 @@
       --card-hover-color: #444444;
       --card-glow-color: rgba(255, 255, 255, 0.2);
       --card-glow-hover-color: rgba(0, 123, 255, 0.7); /* Подсвечивание при наведении в темной теме */
+      --footer-bg-color: #333333;
     }
 
     body {
@@ -32,30 +33,26 @@
       background-color: var(--background-color);
       color: var(--text-color);
       overflow: hidden;
-      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      height: 100vh;
     }
 
     .loader {
-      border: 6px solid var(--text-color);
-      border-top: 6px solid transparent;
+      border: 16px solid #f3f3f3;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto;
+      border-top: 16px solid var(--text-color);
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+      margin-bottom: 20px;
     }
 
     @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .container {
@@ -72,6 +69,7 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
+      margin-bottom: 40px; /* Отступ для футера */
     }
 
     .card {
@@ -114,19 +112,56 @@
 
     .toggle-theme {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: 2px solid var(--text-color);
-      color: var(--text-color);
-      padding: 10px;
+      top: 30px;
+      right: 40px;
+      padding: 10px 20px;
+      background-color: var(--text-color);
+      color: var(--background-color);
+      border: none;
       cursor: pointer;
-      transition: color 0.3s ease, border-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     }
 
     .toggle-theme:hover {
-      background-color: var(--text-color);
-      color: var(--bg-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      border: 2px solid var(--text-color);
+      transform: scale(1.05); /* Плавное увеличение */
+    }
+
+    /* Футер */
+    footer {
+      background-color: var(--footer-bg-color);
+      color: var(--text-color);
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Стили для Activities */
+    .activities-container {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .activity {
+      background-color: var(--card-bg-color);
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 4px 6px var(--card-glow-color);
+      transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
+    }
+
+    .activity:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px var(--card-glow-hover-color);
     }
   </style>
 </head>
@@ -137,23 +172,45 @@
   <h1>Loading Portfolio...</h1>
 
   <div class="container">
+    <h1>Welcome to eqwzzx's Portfolio</h1>
     <div class="cards-container">
       <div class="card visible">
         <h2>Обо мне</h2>
-        <p>Я начинающий веб-разработчик с не большим опытом создания сайтов.</p>
+        <p>Я - eqwzzx, веб-разработчик с большим опытом создания современных сайтов и приложений.</p>
       </div>
       <div class="card">
         <h2>Умения</h2>
-        <p>JavaScript, HTML, CSS.</p>
+        <p>JavaScript, HTML, CSS, React, Node.js, а также опыт работы с базами данных и оптимизацией производительности.</p>
       </div>
       <div class="card">
         <h2>Контакты</h2>
-        <p>Email: eqwzzx@example.com<br>Discord: eqwzzx</p>
+        <p>Email: eqwzzx@example.com<br>Телефон: +123456789</p>
+      </div>
+    </div>
+
+    <!-- Раздел Activities -->
+    <div class="activities-container">
+      <div class="activity">
+        <h3>Project 1</h3>
+        <p>Описание первого проекта</p>
+      </div>
+      <div class="activity">
+        <h3>Project 2</h3>
+        <p>Описание второго проекта</p>
+      </div>
+      <div class="activity">
+        <h3>Project 3</h3>
+        <p>Описание третьего проекта</p>
       </div>
     </div>
   </div>
 
   <button class="toggle-theme" onclick="toggleTheme()">Switch theme</button>
+
+  <!-- Футер -->
+  <footer>
+    &copy; 2024 eqwzzx. All rights reserved.
+  </footer>
 
   <script>
     function showContent() {
