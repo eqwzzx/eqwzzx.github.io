@@ -13,8 +13,6 @@
       --card-glow-color: rgba(0, 0, 0, 0.1);
       --card-glow-hover-color: rgba(0, 123, 255, 0.7);
       --footer-bg-color: #e0e0e0;
-      --loader-border-color: #f3f3f3;
-      --loader-top-color: #000000;
     }
 
     [data-theme="dark"] {
@@ -25,8 +23,6 @@
       --card-glow-color: rgba(255, 255, 255, 0.2);
       --card-glow-hover-color: rgba(0, 123, 255, 0.7);
       --footer-bg-color: #333333;
-      --loader-border-color: #333333;
-      --loader-top-color: #ffffff;
     }
 
     body {
@@ -45,12 +41,12 @@
     }
 
     .loader {
-      border: 12px solid var(--loader-border-color);
+      border: 12px solid #f3f3f3;
       border-radius: 50%;
-      border-top: 12px solid var(--loader-top-color);
+      border-top: 12px solid var(--text-color);
       width: 80px;
       height: 80px;
-      animation: spin 1.5s linear infinite;
+      animation: spin 2s linear infinite;
       margin-bottom: 10px;
     }
 
@@ -95,13 +91,13 @@
       text-align: left;
       box-shadow: 0 4px 6px var(--card-glow-color);
       opacity: 0;
-      transform: scale(0.8) translateY(50px);
-      transition: transform 0.8s ease, opacity 0.8s ease, box-shadow 0.3s ease;
+      transform: translateY(50px);
+      transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
     }
 
     .card.visible {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      transform: translateY(0);
     }
 
     .card:hover {
@@ -265,50 +261,39 @@
       } else {
         document.body.setAttribute('data-theme', 'dark');
       }
-      // Перезагрузка анимации загрузки
-      restartLoadingAnimation();
+      // Перезагрузка всех анимаций после смены темы
+      initializePage();
     }
 
-    // Инициализация страницы
+    // Инициализация страницы и показ анимаций
     function initializePage() {
       // Тексты для анимации загрузки
-      const loadingSteps = [
-        "Loading cards...", 
-        "Loading classes...", 
-        "Loading styles..."
-      ];
-
-      const loader = document.querySelector('.loader');
-      const loadingText = document.getElementById('loading-text');
+      let loadingSteps = ['Loading cards...', 'Loading classes...', 'Loading styles...'];
       let currentStep = 0;
 
-      // Смена текста загрузки каждые 1.5 секунды
+      const loadingText = document.getElementById('loading-text');
       const changeLoadingText = setInterval(() => {
         loadingText.textContent = loadingSteps[currentStep];
-        currentStep = (currentStep + 1) % loadingSteps.length;
-      }, 1500);
+        currentStep++;
+        if (currentStep >= loadingSteps.length) {
+          currentStep = 0;
+        }
+      }, 1000);
 
       // Показ основного контента через 3 секунды
       setTimeout(() => {
         clearInterval(changeLoadingText);
-        loader.style.display = 'none';
+        document.querySelector('.loader').style.display = 'none';
         loadingText.style.display = 'none';
         document.querySelector('.container').style.display = 'block';
 
-        // Анимация появления карточек
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('visible');
-          }, index * 200); // Новая анимация появления карточек
+          }, index * 300); // Задержка для появления карточек
         });
       }, 3000);
-    }
-
-    // Перезагрузка анимации загрузки
-    function restartLoadingAnimation() {
-      const loader = document.querySelector('.loader');
-      loader.style.display = 'block';
     }
   </script>
 </body>
