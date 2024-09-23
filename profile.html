@@ -5,14 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>eqwzzx Portfolio</title>
   <style>
+    /* Определение цветовых схем для теплого режима и обычного */
     :root {
       --background-color: #ffffff;
       --text-color: #000000;
+      --card-bg-color: #f0f0f0;
+      --card-hover-color: #e0e0e0;
+      --card-glow-color: rgba(0, 0, 0, 0.1);
     }
 
     [data-theme="dark"] {
       --background-color: #1e1e1e;
       --text-color: #ffffff;
+      --card-bg-color: #333333;
+      --card-hover-color: #444444;
+      --card-glow-color: rgba(255, 255, 255, 0.2);
+    }
+
+    [data-theme="warm"] {
+      --background-color: #fff4e6;
+      --text-color: #663300;
+      --card-bg-color: #ffe0b3;
+      --card-hover-color: #ffcc99;
+      --card-glow-color: rgba(255, 165, 0, 0.4);
     }
 
     body {
@@ -36,7 +51,7 @@
       width: 120px;
       height: 120px;
       animation: spin 2s linear infinite;
-      margin-bottom: 20px; /* отступ для текста ниже загрузчика */
+      margin-bottom: 20px;
     }
 
     @keyframes spin {
@@ -49,16 +64,27 @@
       text-align: center;
     }
 
-    .portfolio {
-      display: none;
-      margin-top: 50px;
+    .card {
+      background-color: var(--card-bg-color);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 10px;
+      width: 300px;
+      text-align: left;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
-    .portfolio img {
-      width: 300px;
-      height: 200px;
-      object-fit: cover;
-      margin: 10px;
+    .card:hover {
+      box-shadow: 0 6px 12px var(--card-glow-color);
+      background-color: var(--card-hover-color);
+    }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .logo {
@@ -102,10 +128,18 @@
   <h1>Loading Portfolio...</h1>
 
   <div class="container">
-    <div class="portfolio">
-      <img src="portfolio1.jpg" alt="Project 1">
-      <img src="portfolio2.jpg" alt="Project 2">
-      <img src="portfolio3.jpg" alt="Project 3">
+    <h1>Welcome to eqwzzx's Portfolio</h1>
+    <div class="card visible">
+      <h2>Обо мне</h2>
+      <p>Я - eqwzzx, веб-разработчик с большим опытом создания современных сайтов и приложений.</p>
+    </div>
+    <div class="card">
+      <h2>Умения</h2>
+      <p>JavaScript, HTML, CSS, React, Node.js, а также опыт работы с базами данных и оптимизацией производительности.</p>
+    </div>
+    <div class="card">
+      <h2>Контакты</h2>
+      <p>Email: eqwzzx@example.com<br>Телефон: +123456789</p>
     </div>
   </div>
 
@@ -117,7 +151,14 @@
         document.querySelector('.loader').style.display = 'none';
         document.querySelector('h1').textContent = 'Welcome to eqwzzx\'s Portfolio';
         document.querySelector('.container').style.display = 'block';
-        document.querySelector('.portfolio').style.display = 'flex';
+
+        // Добавляем анимацию появления для карточек
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('visible');
+          }, index * 300); // Задержка для появления каждой карточки
+        });
       }, 3000); // Задержка в 3 секунды для анимации загрузки
     }
 
@@ -125,8 +166,10 @@
       const currentTheme = document.body.getAttribute('data-theme');
       if (currentTheme === 'dark') {
         document.body.removeAttribute('data-theme');
+      } else if (currentTheme === 'warm') {
+        document.body.removeAttribute('data-theme');
       } else {
-        document.body.setAttribute('data-theme', 'dark');
+        document.body.setAttribute('data-theme', 'warm');
       }
     }
   </script>
