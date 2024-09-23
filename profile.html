@@ -40,18 +40,28 @@
     }
 
     .loader {
-      border: 16px solid #f3f3f3;
+      border: 12px solid #f3f3f3; /* Изменен размер обводки */
       border-radius: 50%;
-      border-top: 16px solid var(--text-color);
-      width: 120px;
-      height: 120px;
+      border-top: 12px solid var(--text-color);
+      width: 80px; /* Уменьшена ширина */
+      height: 80px; /* Уменьшена высота */
       animation: spin 2s linear infinite;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    @keyframes fade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     .container {
@@ -84,14 +94,14 @@
       transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
     }
 
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .card:hover {
       box-shadow: 0 8px 16px var(--card-glow-hover-color);
       background-color: var(--card-hover-color);
-    }
-
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .logo {
@@ -199,21 +209,22 @@
   <div class="logo" onclick="window.location.href='404.html'">eqwzzx</div>
 
   <div class="loader"></div>
-  <h1>Loading Portfolio...</h1>
+  <div class="loading-text" id="loading-text">Loading...</div>
 
   <div class="container">
+    <h1>Welcome to eqwzzx's Portfolio</h1>
     <div class="cards-container">
-      <div class="card visible">
-        <h2>About Me</h2>
+      <div class="card">
+        <h2>Обо мне</h2>
         <p>Я начинающий веб-разработчик с опытом создания сайтов.</p>
       </div>
       <div class="card">
-        <h2>Skills</h2>
+        <h2>Умения</h2>
         <p>JavaScript, HTML, CSS.</p>
       </div>
       <div class="card">
-        <h2>Contacts</h2>
-        <p>Email: root@eqwzzx.fun<br>Discord: eqwzzx</p>
+        <h2>Контакты</h2>
+        <p>Email: eqwzzx@example.com<br>Телефон: +123456789</p>
       </div>
     </div>
 
@@ -241,19 +252,30 @@
 
   <script>
     function showContent() {
+      let loadingSteps = ['Loading cards...', 'Loading classes...', 'Loading styles...'];
+      let currentStep = 0;
+      
+      const loadingText = document.getElementById('loading-text');
+      const changeLoadingText = setInterval(() => {
+        loadingText.textContent = loadingSteps[currentStep];
+        currentStep++;
+        if (currentStep >= loadingSteps.length) {
+          clearInterval(changeLoadingText);
+        }
+      }, 1000); // Каждую секунду меняем текст
+
       setTimeout(function() {
         document.querySelector('.loader').style.display = 'none';
-        document.querySelector('h1').textContent = 'Welcome to eqwzzx\'s Portfolio';
+        loadingText.style.display = 'none';
         document.querySelector('.container').style.display = 'block';
 
-        // Добавляем анимацию появления карточек
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('visible');
-          }, index * 300);
+          }, index * 300); // Задержка для анимации появления карточек
         });
-      }, 3000); // Задержка в 3 секунды для анимации загрузки
+      }, 3000);
     }
 
     function toggleTheme() {
