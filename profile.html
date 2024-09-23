@@ -37,14 +37,15 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .loader {
-      border: 12px solid #f3f3f3; /* Изменен размер обводки */
+      border: 12px solid #f3f3f3;
       border-radius: 50%;
       border-top: 12px solid var(--text-color);
-      width: 80px; /* Уменьшена ширина */
-      height: 80px; /* Уменьшена высота */
+      width: 80px;
+      height: 80px;
       animation: spin 2s linear infinite;
       margin-bottom: 10px;
     }
@@ -146,6 +147,7 @@
       bottom: 0;
       width: 100%;
       text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .activities-container {
@@ -205,7 +207,7 @@
     }
   </style>
 </head>
-<body onload="showContent()">
+<body onload="initializePage()">
   <div class="logo" onclick="window.location.href='404.html'">eqwzzx</div>
 
   <div class="loader"></div>
@@ -251,20 +253,36 @@
   </footer>
 
   <script>
-    function showContent() {
+    // Переключение темы
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.body.removeAttribute('data-theme');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+      }
+      // Перезагрузка всех анимаций после смены темы
+      initializePage();
+    }
+
+    // Инициализация страницы и показ анимаций
+    function initializePage() {
+      // Тексты для анимации загрузки
       let loadingSteps = ['Loading cards...', 'Loading classes...', 'Loading styles...'];
       let currentStep = 0;
-      
+
       const loadingText = document.getElementById('loading-text');
       const changeLoadingText = setInterval(() => {
         loadingText.textContent = loadingSteps[currentStep];
         currentStep++;
         if (currentStep >= loadingSteps.length) {
-          clearInterval(changeLoadingText);
+          currentStep = 0;
         }
-      }, 1000); // Каждую секунду меняем текст
+      }, 1000);
 
-      setTimeout(function() {
+      // Показ основного контента через 3 секунды
+      setTimeout(() => {
+        clearInterval(changeLoadingText);
         document.querySelector('.loader').style.display = 'none';
         loadingText.style.display = 'none';
         document.querySelector('.container').style.display = 'block';
@@ -273,18 +291,9 @@
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('visible');
-          }, index * 300); // Задержка для анимации появления карточек
+          }, index * 300); // Задержка для появления карточек
         });
       }, 3000);
-    }
-
-    function toggleTheme() {
-      const currentTheme = document.body.getAttribute('data-theme');
-      if (currentTheme === 'dark') {
-        document.body.removeAttribute('data-theme');
-      } else {
-        document.body.setAttribute('data-theme', 'dark');
-      }
     }
   </script>
 </body>
