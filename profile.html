@@ -31,12 +31,12 @@
       font-family: 'Arial', sans-serif;
       background-color: var(--background-color);
       color: var(--text-color);
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      overflow: hidden;
     }
 
     .loader {
@@ -160,6 +160,39 @@
       transform: scale(1.05);
       box-shadow: 0 8px 16px var(--card-glow-hover-color);
     }
+
+    .dots {
+      display: inline-block;
+      margin-left: 5px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-color);
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: blink 1.5s infinite;
+      opacity: 0;
+    }
+
+    .dot:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.9s;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
 <body onload="showContent()">
@@ -195,7 +228,7 @@
       </div>
       <div class="activity">
         <h3>???</h3>
-        <p>Soon...</p>
+        <p>Soon<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></p>
       </div>
     </div>
   </div>
@@ -213,13 +246,14 @@
         document.querySelector('h1').textContent = 'Welcome to eqwzzx\'s Portfolio';
         document.querySelector('.container').style.display = 'block';
 
+        // Добавляем анимацию появления карточек
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('visible');
           }, index * 300);
         });
-      }, 3000);
+      }, 3000); // Задержка в 3 секунды для анимации загрузки
     }
 
     function toggleTheme() {
