@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>eqwzzx Portfolio</title>
   <style>
-    /* Определение цветовых схем для теплого режима и обычного */
+    /* Определение цветовых схем для светлого и тёмного режима */
     :root {
       --background-color: #ffffff;
       --text-color: #000000;
@@ -20,14 +20,6 @@
       --card-bg-color: #333333;
       --card-hover-color: #444444;
       --card-glow-color: rgba(255, 255, 255, 0.2);
-    }
-
-    [data-theme="warm"] {
-      --background-color: #fff4e6;
-      --text-color: #663300;
-      --card-bg-color: #ffe0b3;
-      --card-hover-color: #ffcc99;
-      --card-glow-color: rgba(255, 165, 0, 0.4);
     }
 
     body {
@@ -166,10 +158,8 @@
       const currentTheme = document.body.getAttribute('data-theme');
       if (currentTheme === 'dark') {
         document.body.removeAttribute('data-theme');
-      } else if (currentTheme === 'warm') {
-        document.body.removeAttribute('data-theme');
       } else {
-        document.body.setAttribute('data-theme', 'warm');
+        document.body.setAttribute('data-theme', 'dark');
       }
     }
   </script>
