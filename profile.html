@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>eqwzzx Portfolio</title>
   <style>
-    /* Определение цветовых схем для светлого и тёмного режима */
     :root {
       --background-color: #ffffff;
       --text-color: #000000;
@@ -131,15 +130,14 @@
   <h1>Loading Portfolio...</h1>
 
   <div class="container">
-    <h1>Welcome to eqwzzx's Portfolio</h1>
     <div class="cards-container">
       <div class="card visible">
         <h2>Обо мне</h2>
-        <p>Я - eqwzzx, веб-разработчик с большим опытом создания современных сайтов и приложений.</p>
+        <p>Я - eqwzzx, начинающий веб-разработчик</p>
       </div>
       <div class="card">
         <h2>Умения</h2>
-        <p>JavaScript, HTML, CSS, React, Node.js, а также опыт работы с базами данных и оптимизацией производительности.</p>
+        <p>HTML, CSS, JavaScript</p>
       </div>
       <div class="card">
         <h2>Контакты</h2>
@@ -157,7 +155,6 @@
         document.querySelector('h1').textContent = 'Welcome to eqwzzx\'s Portfolio';
         document.querySelector('.container').style.display = 'block';
 
-        // Добавляем анимацию появления для карточек
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
           setTimeout(() => {
