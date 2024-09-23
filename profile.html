@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>eqwzzx Portfolio</title>
   <style>
-    /* Определение цветовых схем для светлого и тёмного режима */
     :root {
       --background-color: #ffffff;
       --text-color: #000000;
       --card-bg-color: #f0f0f0;
       --card-hover-color: #e0e0e0;
       --card-glow-color: rgba(0, 0, 0, 0.1);
-      --card-glow-hover-color: rgba(0, 123, 255, 0.7); /* Подсвечивание при наведении */
+      --card-glow-hover-color: rgba(0, 123, 255, 0.7);
       --footer-bg-color: #e0e0e0;
     }
 
@@ -22,7 +21,7 @@
       --card-bg-color: #333333;
       --card-hover-color: #444444;
       --card-glow-color: rgba(255, 255, 255, 0.2);
-      --card-glow-hover-color: rgba(0, 123, 255, 0.7); /* Подсвечивание при наведении в темной теме */
+      --card-glow-hover-color: rgba(0, 123, 255, 0.7);
       --footer-bg-color: #333333;
     }
 
@@ -69,7 +68,7 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      margin-bottom: 40px; /* Отступ для футера */
+      margin-bottom: 40px;
     }
 
     .card {
@@ -86,7 +85,7 @@
     }
 
     .card:hover {
-      box-shadow: 0 8px 16px var(--card-glow-hover-color); /* Подсвечивание при наведении */
+      box-shadow: 0 8px 16px var(--card-glow-hover-color);
       background-color: var(--card-hover-color);
     }
 
@@ -126,10 +125,9 @@
       background-color: var(--background-color);
       color: var(--text-color);
       border: 2px solid var(--text-color);
-      transform: scale(1.05); /* Плавное увеличение */
+      transform: scale(1.05);
     }
 
-    /* Футер */
     footer {
       background-color: var(--footer-bg-color);
       color: var(--text-color);
@@ -140,7 +138,6 @@
       text-align: center;
     }
 
-    /* Стили для Activities */
     .activities-container {
       margin-top: 40px;
       display: flex;
@@ -176,11 +173,11 @@
     <div class="cards-container">
       <div class="card visible">
         <h2>Обо мне</h2>
-        <p>Я - eqwzzx, веб-разработчик с большим опытом создания современных сайтов и приложений.</p>
+        <p>Я начинающий веб-разработчик с опытом создания сайтов.</p>
       </div>
       <div class="card">
         <h2>Умения</h2>
-        <p>JavaScript, HTML, CSS, React, Node.js, а также опыт работы с базами данных и оптимизацией производительности.</p>
+        <p>JavaScript, HTML, CSS</p>
       </div>
       <div class="card">
         <h2>Контакты</h2>
@@ -188,26 +185,24 @@
       </div>
     </div>
 
-    <!-- Раздел Activities -->
     <div class="activities-container">
       <div class="activity">
-        <h3>Project 1</h3>
-        <p>Описание первого проекта</p>
+        <h3>Portfolio</h3>
+        <p>My portfolio</p>
       </div>
       <div class="activity">
-        <h3>Project 2</h3>
-        <p>Описание второго проекта</p>
+        <h3>Pulsar</h3>
+        <p>Discord Bot</p>
       </div>
       <div class="activity">
-        <h3>Project 3</h3>
-        <p>Описание третьего проекта</p>
+        <h3>???</h3>
+        <p>Soon...</p>
       </div>
     </div>
   </div>
 
   <button class="toggle-theme" onclick="toggleTheme()">Switch theme</button>
 
-  <!-- Футер -->
   <footer>
     &copy; 2024 eqwzzx. All rights reserved.
   </footer>
@@ -219,14 +214,13 @@
         document.querySelector('h1').textContent = 'Welcome to eqwzzx\'s Portfolio';
         document.querySelector('.container').style.display = 'block';
 
-        // Добавляем анимацию появления для карточек
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('visible');
-          }, index * 300); // Задержка для появления каждой карточки
+          }, index * 300);
         });
-      }, 3000); // Задержка в 3 секунды для анимации загрузки
+      }, 3000);
     }
 
     function toggleTheme() {
