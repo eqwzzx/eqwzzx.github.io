@@ -226,7 +226,7 @@
       </div>
       <div class="card">
         <h2>Контакты</h2>
-        <p>Email: eqwzzx@example.com<br>Телефон: +123456789</p>
+        <p>Email: root@eqwzzx.fun<br>Discord: eqwzzx</p>
       </div>
     </div>
 
@@ -253,7 +253,6 @@
   </footer>
 
   <script>
-    // Переключение темы
     function toggleTheme() {
       const currentTheme = document.body.getAttribute('data-theme');
       if (currentTheme === 'dark') {
@@ -261,13 +260,10 @@
       } else {
         document.body.setAttribute('data-theme', 'dark');
       }
-      // Перезагрузка всех анимаций после смены темы
       initializePage();
     }
 
-    // Инициализация страницы и показ анимаций
     function initializePage() {
-      // Тексты для анимации загрузки
       let loadingSteps = ['Loading cards...', 'Loading classes...', 'Loading styles...'];
       let currentStep = 0;
 
@@ -280,7 +276,6 @@
         }
       }, 1000);
 
-      // Показ основного контента через 3 секунды
       setTimeout(() => {
         clearInterval(changeLoadingText);
         document.querySelector('.loader').style.display = 'none';
@@ -291,7 +286,7 @@
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('visible');
-          }, index * 300); // Задержка для появления карточек
+          }, index * 300);
         });
       }, 3000);
     }
