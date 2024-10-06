@@ -1,14 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: ["./src/**/*.{vue,html,js}"],
+  content: [
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./app.vue",
+    "./error.vue",
+  ],
   theme: {
     extend: {
-      screens: {
-        'max-sm': {'max': '640px'},  // Styles for small devices (phones)
-        'max-md': {'max': '768px'},  // Styles for tablets
-        'max-lg': {'max': '1024px'}, // Styles for devices smaller than laptops
-      }
-    }
-  }
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
 }
