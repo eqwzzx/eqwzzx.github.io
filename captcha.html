@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="scr/fakerecaptcha.css" rel="stylesheet">
+        <style>
+            .captcha-image {
+                width: 100%; 
+                max-width: 300px; 
+                max-height: 300px; 
+                object-fit: contain; 
+            }
+        </style>
+    </head>
+    <body>
+    <div class="fkrc-container fkrc-m-p">
+        <div id="fkrc-checkbox-window" class="fkrc-checkbox-window fkrc-m-p fkrc-block">
+            <div class="fkrc-checkbox-container fkrc-m-p">
+                <button type="button" id="fkrc-checkbox" class="fkrc-checkbox fkrc-m-p fkrc-line-normal"></button>
+            </div>
+            <p class="fkrc-im-not-a-robot fkrc-m-p fkrc-line-normal">Я не робот</p>
+            <img src="images/captcha_logo.svg" class="fkrc-captcha-logo fkrc-line-normal" alt="">
+            <p class="fkrc-checkbox-desc fkrc-m-p fkrc-line-normal">PM-CAPTCHA</p>
+            <p class="fkrc-checkbox-desc fkrc-m-p fkrc-line-normal">Privacy - Terms</p>
+            <img src="images/captcha_spinner.gif" class="fkrc-spinner fkrc-m-p fkrc-line-normal" alt="" id="fkrc-spinner">
+        </div>
+        <div id="fkrc-verifywin-window" class="fkrc-verifywin-window">
+            <div class="fkrc-verifywin-container">
+                <header class="fkrc-verifywin-header">
+                    <span class="fkrc-verifywin-header-text-medium fkrc-m-p fkrc-block">Выделите все квадраты с </span>
+                    <span class="fkrc-verifywin-header-text-big fkrc-m-p fkrc-block">Баги</span>
+                    <span class="fkrc-verifywin-header-text-medium fkrc-m-p fkrc-block">Если их нет, нажмите «Пропустить».</span>
+                </header>
+                <main class="fkrc-verifywin-main">
+                    <img src="img.jpg" class="captcha-image" alt="Captcha Image">
+                </main>
+            </div>
+            <footer class="fkrc-verifywin-container fkrc-verifywin-footer">
+                <div class="fkrc-verifywin-footer-left">
+                    Нажмите кнопку подтверждения, чтобы продолжить.
+                </div>
+                <button type="button" class="fkrc-verifywin-verify-button fkrc-block" id="fkrc-verifywin-verify-button">Пропустить</button>
+            </footer>
+        </div>
+        <img src="images/captcha_arrow.svg" alt="" class="fkrc-verifywin-window-arrow" id="fkrc-verifywin-window-arrow"/>
+    </div>
+        <script src="scr/fakerecaptcha.js"></script>
+    </body>
+</html>
