@@ -1,173 +1,167 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Проверка безопасности</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex, nofollow">
-    <style>
-        :root {
-            --bg: #181c24;
-            --box-bg: #222736;
-            --primary: #f38020;
-            --text-main: #f3f3f7;
-            --text-muted: #9fa7bd;
-            --radius: 20px;
-            --shadow: 0 8px 32px 0 rgba(0,0,0,0.45);
-            --transition: .6s cubic-bezier(.77,0,.175,1);
-        }
-
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            min-height: 100vh;
-            min-width: 100vw;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .center-box {
-            background: var(--box-bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 48px 38px 36px 38px;
-            max-width: 370px;
-            width: 95vw;
-            min-height: 420px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: boxIn 1s var(--transition) both;
-            position: relative;
-        }
-
-        @keyframes boxIn {
-            0% {
-                opacity: 0;
-                transform: translateY(64px) scale(.95);
-            }
-            70% {
-                opacity: 1;
-                transform: translateY(-10px) scale(1.03);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .loading-spinner {
-            width: 54px;
-            height: 54px;
-            border: 6px solid #232634;
-            border-top: 6px solid var(--primary);
-            border-radius: 50%;
-            animation: spinner 0.8s linear infinite, fadeIn 1.2s var(--transition) 0.1s both;
-            margin-bottom: 28px;
-        }
-
-        @keyframes spinner {
-            0% {transform: rotate(0deg);}
-            100% {transform: rotate(360deg);}
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-
-        .title {
-            font-size: 1.35em;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 12px;
-            letter-spacing: 0.03em;
-            text-align: center;
-            animation: fadeIn 1s var(--transition) .3s both;
-        }
-
-        .desc {
-            color: var(--text-muted);
-            font-size: 1.06em;
-            text-align: center;
-            line-height: 1.7;
-            margin-bottom: 22px;
-            animation: fadeIn 1s var(--transition) .5s both;
-        }
-
-        .captcha-placeholder {
-            margin: 18px 0 0 0;
-            width: 100%;
-            min-height: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 1.2s var(--transition) .7s both;
-        }
-
-        .footer {
-            margin-top: 32px;
-            font-size: .93em;
-            color: #626c83;
-            text-align: center;
-            animation: fadeIn 1s var(--transition) 1s both;
-            padding-top: 10px;
-            border-top: 1px solid #232634;
-        }
-        .footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        .footer-tokens {
-            margin-top: 8px;
-            font-size: 0.87em;
-            color: #7c8597;
-            letter-spacing: 0.02em;
-            word-break: break-all;
-        }
-
-        @media (max-width: 500px) {
-            .center-box {
-                padding: 26px 4vw 18px 4vw;
-                min-height: 320px;
-            }
-            .footer { font-size: .85em; }
-            .footer-tokens { font-size: 0.81em; }
-            .title { font-size: 1.1em; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Проверка безопасности | Managed Challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-bg: #181b20;
+      --card-bg: #23272f;
+      --accent: #fc4349;
+      --accent2: #ffbb33;
+      --text-main: #e6e6e6;
+      --text-secondary: #a0a4ae;
+      --shadow: 0 4px 32px 0 rgba(0,0,0,0.5);
+      --anim-duration: 1.4s;
+    }
+    html, body {margin:0;padding:0;background:var(--primary-bg);color:var(--text-main);font-family:'JetBrains Mono','Fira Mono','Consolas',monospace;min-height:100vh;}
+    body {display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;}
+    .container {background:var(--card-bg);border-radius:18px;box-shadow:var(--shadow);padding:2.5rem 2.5rem 2rem 2.5rem;max-width:420px;width:100%;margin:1.2rem;text-align:center;position:relative;overflow:hidden;z-index:1;}
+    .waf-logo {
+      margin-bottom: 1.5rem;
+      margin-top: 0.3rem;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      animation: logoPop var(--anim-duration) cubic-bezier(.68, -0.55, .27, 1.55);
+    }
+    @keyframes logoPop {
+      0% { transform: scale(.8) rotate(-8deg); opacity: 0; }
+      50% { transform: scale(1.1) rotate(4deg); opacity: 1;}
+      100% { transform: scale(1) rotate(0); opacity: 1;}
+    }
+    .pulse {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 100px; height: 100px;
+      background: rgba(252,67,73,0.12);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulseAnim 2.2s infinite cubic-bezier(.4,0,.2,1);
+      z-index: 0;
+    }
+    @keyframes pulseAnim {
+      0% { opacity: .25; transform: translate(-50%, -50%) scale(.75);}
+      50% { opacity: .09; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4);}
+    }
+    .bolt-anim {
+      position: relative;
+      width: 74px;
+      height: 74px;
+      z-index: 1;
+      display: inline-block;
+    }
+    .bolt-anim svg .bolt-main {
+      filter: drop-shadow(0 0 10px #ffbb33aa);
+      transform-origin: 50% 55%;
+      animation: boltFlash 1.5s infinite cubic-bezier(.8,0,.2,1);
+    }
+    @keyframes boltFlash {
+      0% { filter: drop-shadow(0 0 0 #ffbb33aa); opacity: 1; transform: scale(1) rotate(-2deg);}
+      15% { filter: drop-shadow(0 0 16px #ffbb33cc); opacity: 1; transform: scale(1.08) rotate(2deg);}
+      23% { filter: drop-shadow(0 0 28px #fff433); opacity: 0.93; transform: scale(1.13) rotate(-3deg);}
+      33% { filter: drop-shadow(0 0 9px #ffbb33bb); opacity: 1; transform: scale(1) rotate(0);}
+      100% { filter: drop-shadow(0 0 0 #ffbb33aa); opacity: 1; transform: scale(1) rotate(-2deg);}
+    }
+    h1 {font-size:2rem;font-weight:700;color:var(--accent);margin:0 0 0.7rem 0;letter-spacing:-.02em;animation:fadeInDown .8s .2s both;}
+    @keyframes fadeInDown {0%{opacity:0;transform:translateY(-30px);}100%{opacity:1;transform:translateY(0);}}
+    .desc {color:var(--text-secondary);margin-bottom:1.6rem;animation:fadeInUp .8s .4s both;}
+    @keyframes fadeInUp {0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
+    .captcha-box {
+      margin: 1.6rem 0 1.1rem 0;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInUp .8s .6s both;
+    }
+    .cloudflare-ribbon {
+        color: #4c4e56;
+        animation:fadeInUp .8s 1s both;
+    }
+    .footer-note {
+      color:#4c4e56;
+      font-size:.93em;
+      margin-top:2.2rem;
+      animation:fadeInUp .8s 1s both;
+      text-align: left;
+    }
+    .footer-token-list {
+      margin-top: 0.5em;
+      font-size: .95em;
+      color:var(--text-secondary);
+      text-align: left;
+    }
+    .footer-token-label {
+      font-size: .92em;
+      color:var(--text-secondary);
+    }
+    .footer-token-value {
+      color:var(--text-main);
+      font-weight:500;
+      background:#191c22;
+      border-radius:6px;
+      padding:.12em .5em;
+      display:inline-block;
+      margin-left:0.3em;
+      box-shadow:0 0 0 2px #23272f;
+      letter-spacing:.01em;
+    }
+    @keyframes fadeInRight {
+      0% { opacity: 0; right: -120px;}
+      100% { opacity: 1; right: 16px;}
+    }
+    @media (max-width:580px){
+      .container{max-width:95vw;padding:1.2rem 0.5rem 1.2rem 0.5rem;}
+      .cloudflare-ribbon{right:4px;top:8px;padding:4px 18px;}
+      .waf-logo { width: 62px; height: 62px;}
+      .bolt-anim { width: 54px; height: 54px;}
+      .pulse { width: 70px; height: 70px;}
+    }
+  </style>
 </head>
 <body>
-    <div class="center-box">
-        <div class="loading-spinner"></div>
-        <div class="title">Проверка безопасности</div>
-        <div class="desc">
-            Пожалуйста, подтвердите, что вы не робот.<br>
-            Это необходимо для защиты сайта от автоматических запросов.<br>
-            <strong>Если вы не видите капчу — включите JavaScript и обновите страницу.</strong>
-        </div>
-        <div class="captcha-placeholder">
-            <!-- CAPTCHA TOKEN PLACEHOLDER -->
-            ::CAPTCHA_BOX::
-        </div>
-        <div class="footer">
-            Защита от DDoS и ботов &mdash;
-            <a href="https://eqwzzx.fun" target="_blank">Eqwzzx</a>
-            <div class="footer-tokens">
-                IP: <b>::CLIENT_IP::</b><br>
-                Ray ID: <b>::RAY_ID::</b><br>
-                GEO: <b>::GEO::</b>
-            </div>
-        </div>
+  <div class="container">
+    <div class="waf-logo">
+      <span class="pulse"></span>
+      <span class="bolt-anim">
+        <svg viewBox="0 0 64 64" width="70" height="70" fill="none">
+          <polygon class="bolt-main" points="32,7 21,38 32,38 27,57 47,27 35,27 41,7"
+            fill="url(#boltGrad)" stroke="#FBAF19" stroke-width="2.2" />
+          <defs>
+            <linearGradient id="boltGrad" x1="22" y1="7" x2="47" y2="57" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff433"/>
+              <stop offset="0.4" stop-color="#ffbb33"/>
+              <stop offset="1" stop-color="#fc4349"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
     </div>
+    <h1>Проверка безопасности</h1>
+    <div class="desc">
+      Для продолжения работы с сайтом, пожалуйста, подтвердите, что вы не робот.<br>
+      Это стандартная проверка безопасности.
+    </div>
+    <div class="captcha-box">
+      ::CAPTCHA_BOX::
+    </div>
+    <div class="footer-note">
+      <div>Cloudflare Managed Challenge &mdash; дополнительная защита</div>
+      <div class="footer-token-list">
+        <div><span class="footer-token-label">IP клиента:</span> <span class="footer-token-value">::CLIENT_IP::</span></div>
+        <div><span class="footer-token-label">Ray ID:</span> <span class="footer-token-value">::RAY_ID::</span></div>
+        <div><span class="footer-token-label">Страна:</span> <span class="footer-token-value">::GEO::</span></div>
+      </div>
+    </div>
+    <div class="cloudflare-ribbon"><a href="https://eqwzzx.fun", style="color: #4c4e4c;">by eqwzzx</div>
+  </div>
 </body>
 </html>
