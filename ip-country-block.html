@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Доступ ограничен по IP или стране</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-bg: #181b20;
+      --card-bg: #23272f;
+      --accent: #fc4349;
+      --accent2: #ffbb33;
+      --text-main: #e6e6e6;
+      --text-secondary: #a0a4ae;
+      --shadow: 0 4px 32px 0 rgba(0,0,0,0.5);
+      --anim-duration: 1.4s;
+    }
+    html, body {margin:0;padding:0;background:var(--primary-bg);color:var(--text-main);font-family:'JetBrains Mono','Fira Mono','Consolas',monospace;min-height:100vh;}
+    body {display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;}
+    .container {background:var(--card-bg);border-radius:18px;box-shadow:var(--shadow);padding:2.5rem 2.5rem 2rem 2.5rem;max-width:420px;width:100%;margin:1.2rem;text-align:center;position:relative;overflow:hidden;z-index:1;}
+    .waf-logo {margin-bottom: 1.5rem;margin-top: 0.3rem;width: 80px;height: 80px;display: flex;align-items: center;justify-content: center;position: relative;margin-left: auto;margin-right: auto;animation: logoPop var(--anim-duration) cubic-bezier(.68, -0.55, .27, 1.55);}
+    @keyframes logoPop {0% { transform: scale(.8) rotate(-8deg); opacity: 0; }50% { transform: scale(1.1) rotate(4deg); opacity: 1;}100% { transform: scale(1) rotate(0); opacity: 1;}}
+    .pulse {position: absolute;left: 50%; top: 50%;width: 100px; height: 100px;background: rgba(252,67,73,0.12);border-radius: 50%;transform: translate(-50%, -50%);animation: pulseAnim 2.2s infinite cubic-bezier(.4,0,.2,1);z-index: 0;}
+    @keyframes pulseAnim {0% { opacity: .25; transform: translate(-50%, -50%) scale(.75);}50% { opacity: .09; }100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4);}}
+    .bolt-anim {position: relative;width: 74px;height: 74px;z-index: 1;display: inline-block;}
+    .bolt-anim svg .bolt-main {filter: drop-shadow(0 0 10px #ffbb33aa);transform-origin: 50% 55%;animation: boltFlash 1.5s infinite cubic-bezier(.8,0,.2,1);}
+    @keyframes boltFlash {0% { filter: drop-shadow(0 0 0 #ffbb33aa); opacity: 1; transform: scale(1) rotate(-2deg);}15% { filter: drop-shadow(0 0 16px #ffbb33cc); opacity: 1; transform: scale(1.08) rotate(2deg);}23% { filter: drop-shadow(0 0 28px #fff433); opacity: 0.93; transform: scale(1.13) rotate(-3deg);}33% { filter: drop-shadow(0 0 9px #ffbb33bb); opacity: 1; transform: scale(1) rotate(0);}100% { filter: drop-shadow(0 0 0 #ffbb33aa); opacity: 1; transform: scale(1) rotate(-2deg);}}
+    h1 {font-size:2rem;font-weight:700;color:var(--accent);margin:0 0 0.7rem 0;letter-spacing:-.02em;animation:fadeInDown .8s .2s both;}
+    @keyframes fadeInDown {0%{opacity:0;transform:translateY(-30px);}100%{opacity:1;transform:translateY(0);}}
+    .desc {color:var(--text-secondary);margin-bottom:1.6rem;animation:fadeInUp .8s .4s both;}
+    @keyframes fadeInUp {0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
+    .tokens {display:flex;flex-direction:column;gap:0.5rem;margin:1.2rem 0 1.5rem 0;font-size:1.02rem;font-family:inherit;animation:fadeInUp .8s .7s both;}
+    .token-label {color:var(--text-secondary);font-size:.92em;}
+    .token-value {color:var(--text-main);font-weight:500;background:#191c22;border-radius:6px;padding:.22em .6em;display:inline-block;margin-left:0.4em;box-shadow:0 0 0 2px #23272f;letter-spacing:.01em;transition:background .15s;}
+    .token-value[data-anim]{animation:highlightAnim .7s cubic-bezier(.6,0,.4,1);}
+    @keyframes highlightAnim {0%{background:#fc4349;color:#fff;}100%{background:#191c22;color:var(--text-main);}}
+    .footer-note {color:#4c4e56;font-size:.93em;margin-top:2.2rem;animation:fadeInUp .8s 1s both;}
+    @keyframes fadeInRight {0% { opacity: 0; right: -120px;}100% { opacity: 1; right: 16px;}}
+    @media (max-width: 580px) {.container { max-width: 95vw; padding: 1.2rem 0.5rem 1.2rem 0.5rem;}.cloudflare-ribbon { right: 4px; top: 8px; padding: 4px 18px;}.waf-logo { width: 62px; height: 62px;}.bolt-anim { width: 54px; height: 54px;}.pulse { width: 70px; height: 70px;}}
+    .cloudflare-ribbon {
+        color: #4c4e4c;
+        animation:fadeInUp .8s 1s both;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="waf-logo">
+      <span class="pulse"></span>
+      <span class="bolt-anim">
+        <svg viewBox="0 0 64 64" width="70" height="70" fill="none">
+          <polygon class="bolt-main" points="32,7 21,38 32,38 27,57 47,27 35,27 41,7"
+            fill="url(#boltGrad)" stroke="#FBAF19" stroke-width="2.2" />
+          <defs>
+            <linearGradient id="boltGrad" x1="22" y1="7" x2="47" y2="57" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff433"/>
+              <stop offset="0.4" stop-color="#ffbb33"/>
+              <stop offset="1" stop-color="#fc4349"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+    </div>
+    <h1>Доступ ограничен</h1>
+    <div class="desc">
+      Ваш доступ заблокирован или ограничен по вашему IP-адресу или стране.<br>
+      Если вы считаете, что это ошибка — обратитесь в поддержку сайта.
+    </div>
+    <div class="tokens">
+      <div><span class="token-label">IP клиента:</span> <span class="token-value" data-anim>::CLIENT_IP::</span></div>
+      <div><span class="token-label">Страна:</span> <span class="token-value" data-anim>::GEO::</span></div>
+      <div><span class="token-label">Ray ID:</span> <span class="token-value" data-anim>::RAY_ID::</span></div>
+    </div>
+    <div class="footer-note">
+      Cloudflare IP/Country Block &mdash; защита вашего ресурса
+    </div>
+    <div class="cloudflare-ribbon"><a href="https://eqwzzx.fun", style="color: #4c4e4c;">by eqwzzx</div>
+  </div>
+</body>
+</html>
